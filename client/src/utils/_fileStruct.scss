@@ -1,0 +1,50 @@
+@import '../utils/colors';
+
+&__item {
+  display: grid;
+  grid-template-columns: 1fr 4fr repeat(5,1fr);
+  gap: 10px;
+  color: $main-color;
+  padding: 5px 0 5px;
+
+  img {
+    cursor: pointer;
+  }
+}
+
+&__name {
+  grid-column-start: 2;
+  align-self: center;
+}
+
+&__date {
+  cursor: default;
+  grid-column-start: 6;
+  align-self: center;
+  text-align: center;
+}
+
+&__size {
+  cursor: default;
+  grid-column-start: 7;
+  align-self: center;
+  text-align: center;
+}
+
+
+&__download {
+    display: none;
+    align-self: center;
+    text-align: center;
+    cursor: pointer;
+    grid-column-start: 3;
+}
+
+&__delete {
+  display: none;
+  align-self: center;
+  text-align: center;
+  cursor: pointer;
+  grid-column-start: 4;
+}
+

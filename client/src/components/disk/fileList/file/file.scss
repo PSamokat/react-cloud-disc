@@ -1,0 +1,25 @@
+@import '../../../../utils/colors';
+
+.file {
+  margin-top: 10px;
+  //border-bottom: solid 2px $main-white;
+  color: white;
+ // background-color: rgba(150, 150, 150, 0.6);
+  border-radius: 7px;
+  @import '../../../../utils/fileStruct';
+  &:hover &__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $main-color;
+      border: 2px solid $main-color;
+      border-radius: 5px;
+      min-height: 35px;
+  }
+
+  &:hover {
+    background-color: rgba(169, 169, 169, 0.3);
+    transform: scale(1.002);
+  }
+
+}

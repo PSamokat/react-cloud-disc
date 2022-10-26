@@ -1,0 +1,19 @@
+@import "../utils/colors";
+@import "../utils/reset";
+
+#root {
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: $main-white
+}
+
+.wrap {
+  padding: 25px 250px;
+}

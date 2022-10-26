@@ -1,0 +1,14 @@
+@import '../../../utils/colors';
+
+
+.filelist {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  @import '../../../utils/fileStruct';
+
+}
+
+.header {
+  padding-right: 0;
+}

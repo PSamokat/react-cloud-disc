@@ -1,0 +1,28 @@
+@import '../colors';
+
+input {
+  width: 467px;
+  height: 32px;
+  border: 2px solid $main-color;
+  border-radius: 12px;
+  text-indent: 36px;
+  color: $main-color;
+  font-size: 18px;
+  &:focus {
+    outline: none;
+  }
+}
+
+::-webkit-input-placeholder {
+  color: $main-color;
+  font-size: 18px;
+  opacity: 0.5;
+  font-weight: 700;
+}
+
+::-moz-placeholder {
+  color: $main-color;
+  font-size: 18px;
+  opacity: 0.5;
+  font-weight: 700;
+}

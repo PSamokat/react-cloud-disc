@@ -1,0 +1,7 @@
+export const actionTypes = {
+    SET_FILES : "SET_FILES",
+    SET_CURRENT_DIR : "SET_CURRENT_DIR",
+    SET_PARENT_DIR: 'SET_PARENT_DIR',
+    ADD_FILE: "ADD_FILE",
+    DELETE_FILE: "DELETE_FILE"
+}
