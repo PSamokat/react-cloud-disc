@@ -29,7 +29,7 @@ const File = ({file}) => {
             <div className="file__item">
                 <img src={file.type === 'dir'? folderLogo : fileLogo } alt="" className="file__img"/>
                 <div className="file__name">{file.name}</div>
-                <div className="file__button file__download" onClick={downloadClickHandler}>Скачать</div>
+                {file.type === 'dir' || <div className="file__button file__download" onClick={downloadClickHandler}>Скачать</div>}
                 <div className="file__button file__delete" onClick={deleteClickHandler}>Удалить</div>
                 <div className="file__date">{file.date.slice(0,10)}</div>
                 <div className="file__size">{file.size}</div>

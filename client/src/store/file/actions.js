@@ -42,6 +42,7 @@ export function uploadFile (file, dirId) {
             if (dirId) {
                 formData.append('parent', dirId)
             }
+
             const response = await axios.post(`http://localhost:5000/api/files/upload`, formData,
                 {
                     headers: {
@@ -65,7 +66,6 @@ export async function downloadFile (file) {
         })
         .then(response => {
             const link = document.createElement('a')
-            console.log(response)
             const href = URL.createObjectURL(new Blob([response.data]))
             link.href = href
             link.setAttribute('download', `${file.name}`)

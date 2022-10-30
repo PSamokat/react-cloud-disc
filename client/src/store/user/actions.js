@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {setUser} from "./action-creators";
 
 export const registration = async (email, password) => {
