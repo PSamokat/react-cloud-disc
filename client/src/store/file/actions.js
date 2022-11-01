@@ -38,7 +38,7 @@ export function uploadFile (file, dirId) {
     return async dispatch => {
         try {
             const formData = new FormData()
-            formData.append('file', file )
+            formData.append('file', file, encodeURIComponent(file.name) );
             if (dirId) {
                 formData.append('parent', dirId)
             }
@@ -49,8 +49,10 @@ export function uploadFile (file, dirId) {
                         authorization: `Bearer ${localStorage.getItem('token')}`,
                     }
                 })
+            response.data.name = decodeURIComponent(response.data.name)
             dispatch(addFile(response.data))
         } catch (e) {
+            console.log(e)
             alert(e?.response?.data?.message)
         }
     }

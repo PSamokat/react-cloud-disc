@@ -56,20 +56,23 @@ class FileController {
                 return
             }
             user.usedSpace += file.size
-            if(parent){
-                path = `${config.filePath}\\${user._id}\\${parent.path}\\${file.name}`
-                if (fs.existsSync(path)) {
-                    file.name = '(copy)' + file.name
-                    path = `${config.filePath}\\${user._id}\\${parent.path}\\${file.name}`
-                }
-            } else {
-                path = `${config.filePath}\\${user._id}\\${file.name}`
-                if (fs.existsSync(path)) {
-                    file.name = '(copy)' + file.name
-                    path = `${config.filePath}\\${user._id}\\${file.name}`
+
+            function checkFileName (parentPath, name) {
+                if (fs.existsSync(parentPath + name)) {
+                    name = '(copy)' + name
+                    return checkFileName(parentPath , name)
+                } else {
+                    return name
                 }
             }
-            await file.mv(path)
+            if(parent){
+                path = `${config.filePath}\\${user._id}\\${parent.path}\\`
+                file.name = checkFileName(path,file.name)
+            } else {
+                path = `${config.filePath}\\${user._id}\\`
+                file.name = checkFileName(path, file.name)
+            }
+            await file.mv(path + file.name)
             const type = file.name.split('.').pop()
             let filePath = file.name
             if (parent) {
