@@ -90,7 +90,6 @@ class FileController {
             await user.save()
             res.json(dbFile)
         } catch (e) {
-            console.log(e)
             return res.status(400).json({message: "Ошибка загрузки файла"})
         }
     }

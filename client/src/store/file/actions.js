@@ -42,7 +42,6 @@ export function uploadFile (file, dirId) {
             if (dirId) {
                 formData.append('parent', dirId)
             }
-
             const response = await axios.post(`http://localhost:5000/api/files/upload`, formData,
                 {
                     headers: {
@@ -52,7 +51,6 @@ export function uploadFile (file, dirId) {
             response.data.name = decodeURIComponent(response.data.name)
             dispatch(addFile(response.data))
         } catch (e) {
-            console.log(e)
             alert(e?.response?.data?.message)
         }
     }
