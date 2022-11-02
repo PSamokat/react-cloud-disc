@@ -1,7 +1,6 @@
 import {fileService} from "../services/fileService.js";
 import User from "../models/User.js";
 import File from "../models/File.js";
-import {config} from "../config/default.js";
 import fs from 'fs'
 
 
@@ -18,10 +17,10 @@ class FileController {
             const parentFile = await File.findOne({_id: parent})
             if (!parentFile) {
                 file.path = name
-                await fileService.createDir(file)
+                await fileService.createDir(req, file)
             } else {
                 file.path = `${parentFile.path}\\${file.name}`
-                await fileService.createDir(file)
+                await fileService.createDir(req, file)
                 parentFile.childs.push(file._id)
                 await parentFile.save()
             }
@@ -66,10 +65,10 @@ class FileController {
                 }
             }
             if(parent){
-                path = `${config.filePath}\\${user._id}\\${parent.path}\\`
+                path = `${req.filePath}\\${user._id}\\${parent.path}\\`
                 file.name = checkFileName(path,file.name)
             } else {
-                path = `${config.filePath}\\${user._id}\\`
+                path = `${req.filePath}\\${user._id}\\`
                 file.name = checkFileName(path, file.name)
             }
             await file.mv(path + file.name)
@@ -83,7 +82,7 @@ class FileController {
                 type,
                 size: file.size,
                 path: filePath,
-                parent: parent?._id,
+                parent: parent ? parent?._id : null,
                 user: user._id
             })
             await dbFile.save()
@@ -97,7 +96,7 @@ class FileController {
     async downloadFile (req, res) {
         try {
             const file = await File.findOne({_id: req.query.id, user: req.user.id})
-            const path = config.filePath + '\\' + req.user.id + '\\' + file.path
+            const path = fileService.getPath(req, file)
             if (fs.existsSync(path)) {
                 res.download(path, file.name)
                 return
@@ -115,7 +114,7 @@ class FileController {
             if (!file) {
                 res.status(400).json({message: 'Файл не найден'})
             }
-            fileService.deleteFile(file)
+            fileService.deleteFile(req, file)
             await file.remove()
             res.json({message: 'Файл удален'})
         } catch (e) {

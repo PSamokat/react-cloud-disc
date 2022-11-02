@@ -32,7 +32,15 @@ const File = ({file}) => {
                 {file.type === 'dir' || <div className="file__button file__download" onClick={downloadClickHandler}>Скачать</div>}
                 <div className="file__button file__delete" onClick={deleteClickHandler}>Удалить</div>
                 <div className="file__date">{file.date.slice(0,10)}</div>
-                <div className="file__size">{file.size}</div>
+                {file.type === 'dir' ||
+                    <div className="file__size">
+                        {
+                            (file.size/1024 < 1000)
+                            ? file.size/1024 + ' MB'
+                            : file.size/(1024*1024)  + ' GB'
+                        }
+                    </div>
+                }
             </div>
 
         </div>
