@@ -19,7 +19,7 @@ class FileController {
                 file.path = name
                 await fileService.createDir(req, file)
             } else {
-                file.path = `${parentFile.path}\\${file.name}`
+                file.path = `${parentFile.path}/${file.name}`
                 await fileService.createDir(req, file)
                 parentFile.childs.push(file._id)
                 await parentFile.save()
@@ -65,17 +65,17 @@ class FileController {
                 }
             }
             if(parent){
-                path = `${req.filePath}\\${user._id}\\${parent.path}\\`
+                path = `${req.filePath}/${user._id}/${parent.path}/`
                 file.name = checkFileName(path,file.name)
             } else {
-                path = `${req.filePath}\\${user._id}\\`
+                path = `${req.filePath}/${user._id}/`
                 file.name = checkFileName(path, file.name)
             }
             await file.mv(path + file.name)
             const type = file.name.split('.').pop()
             let filePath = file.name
             if (parent) {
-                filePath = parent.path + '\\' + file.name
+                filePath = parent.path + '/' + file.name
             }
             const dbFile = new File ({
                 name: file.name,

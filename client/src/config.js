@@ -1,2 +1,1 @@
-export const API_URL = `http://${process.env.API_URL}:${API_PORT}/`
-const API_PORT = process.env.API_PORT
+export const API_URL = `http://185.14.45.149:5000/`

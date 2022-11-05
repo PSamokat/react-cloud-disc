@@ -35,9 +35,11 @@ const File = ({file}) => {
                 {file.type === 'dir' ||
                     <div className="file__size">
                         {
-                            (file.size/1024 < 1000)
-                            ? file.size/1024 + ' MB'
-                            : file.size/(1024*1024)  + ' GB'
+                            (file.size/1024 < 1024)
+                            ? file.size/1024 + ' KB'
+                            : (file.size/(1024*1024) < 1024)
+                                ? file.size/(1024*1024) + ' MB'
+                                : file.size/(1024*1024*1024) + ' GB'
                         }
                     </div>
                 }

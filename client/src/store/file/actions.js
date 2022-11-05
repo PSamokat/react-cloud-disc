@@ -58,24 +58,6 @@ export function uploadFile (file, dirId) {
 }
 
 export async function downloadFile (file) {
-    /*await axios.get(`http://localhost:5000/api/files/download?id=${file._id}`,
-        {
-            headers: {
-                authorization: `Bearer ${localStorage.getItem('token')}`,
-                responseType: 'blob'
-            }
-        })
-        .then(response => {
-            const link = document.createElement('a')
-            const href = URL.createObjectURL(new Blob([response.data]))
-            link.href = href
-            link.setAttribute('download', `${file.name}`)
-            document.body.appendChild(link)
-            link.click()
-            document.body.removeChild(link)
-            URL.revokeObjectURL(href)
-        })
-*/
     const response = await fetch(`${API_URL}api/files/download?id=${file._id}`, {
         headers: {
             authorization: `Bearer ${localStorage.getItem('token')}`
