@@ -1,4 +1,5 @@
 import fs from 'fs'
+import {sep} from "path";
 
 class FileService {
 
@@ -30,7 +31,7 @@ class FileService {
     }
 
     getPath(req, file) {
-        return req.filePath + '/' + file.user + '/' + file.path;
+        return req.filePath + sep + file.user + sep + file.path;
     }
 }
 

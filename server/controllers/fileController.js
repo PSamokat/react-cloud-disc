@@ -1,7 +1,8 @@
 import {fileService} from "../services/fileService.js";
 import User from "../models/User.js";
 import File from "../models/File.js";
-import fs from 'fs'
+import fs from 'fs';
+import {sep} from "path";
 
 
 class FileController {
@@ -19,7 +20,7 @@ class FileController {
                 file.path = name
                 await fileService.createDir(req, file)
             } else {
-                file.path = `${parentFile.path}/${file.name}`
+                file.path = `${parentFile.path}${sep}${file.name}`
                 await fileService.createDir(req, file)
                 parentFile.childs.push(file._id)
                 await parentFile.save()
@@ -65,17 +66,17 @@ class FileController {
                 }
             }
             if(parent){
-                path = `${req.filePath}/${user._id}/${parent.path}/`
+                path = `${req.filePath}${sep}${user._id}${sep}${parent.path}${sep}`
                 file.name = checkFileName(path,file.name)
             } else {
-                path = `${req.filePath}/${user._id}/`
+                path = `${req.filePath}${sep}${user._id}${sep}`
                 file.name = checkFileName(path, file.name)
             }
             await file.mv(path + file.name)
             const type = file.name.split('.').pop()
             let filePath = file.name
             if (parent) {
-                filePath = parent.path + '/' + file.name
+                filePath = `${parent.path}${sep}${file.name}`
             }
             const dbFile = new File ({
                 name: file.name,
